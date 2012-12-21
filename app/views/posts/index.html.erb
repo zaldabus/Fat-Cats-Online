@@ -1,3 +1,5 @@
+<h2>Fat Cats Online</h2>
+
 <ul>
 	<% @posts.each do |post| %>
 		<li>
@@ -5,5 +7,9 @@
 		(<%= link_to pluralize(post.comments.count, "comment" ), post_path(post) %>)
 		</li>
 	<% end %>
+
+</br>
+
+<h4><%= link_to "Submit a link", new_post_path %></h4>
 
 </ul>

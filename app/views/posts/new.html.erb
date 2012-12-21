@@ -1,0 +1,10 @@
+<h2>Submit a link</h2>
+
+<%= form_for @post do |f| %>
+<%= f.label :title %>
+<%= f.text_field :title %>
+<%= f.label :url, "URL" %>
+<%= f.text_field :url %>
+</br>
+<%= f.submit "Submit" %>
+<% end %>
