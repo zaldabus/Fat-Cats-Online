@@ -2,7 +2,8 @@ CourseProject::Application.routes.draw do
   root to: "posts#index"
   resources :posts, only: [:show, :new, :create] do
   	resources :comments, only: [:create]
-  	end
+  	resources :votes, only: [:create]
+   end
   resources :users
 
   get '/my_form', to: 'forms#new'
