@@ -1,11 +1,13 @@
  class Post < ActiveRecord::Base
-	attr_accessible :url, :title
+	attr_accessible :url, :title, :user_id
 
 	validates :title, presence: true
 	validates :url, presence: true
 
 	has_many :comments
 	has_many :votes
+
+	belongs_to :user
 
 before_create :generate_slug
 

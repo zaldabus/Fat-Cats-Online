@@ -4,12 +4,11 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		@user = User.new(params[:user])
-		@user.save
-		redirect_to show_user_path
-	end
-
-	def show
-		@user = User.find(params[:id])
+		@user = User.create(params[:user])
+		if @user.save
+			redirect_to root_path, notice: "User account created!"
+		else
+			render 'new'
+		end
 	end
 end
