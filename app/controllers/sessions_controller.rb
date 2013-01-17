@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 	def create
 		user = User.find_by_username(params[:username])
 		if user && user.authenticate(params[:password])
-			session[:user] = user
+			session[:user_id] = user.id
 			redirect_to root_path, notice: "Welcome to Fat Cats Online!"
 		else
 		  flash[:error]	= "Username or Password not found."
@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		session[:user] = nil
+		session[:user_id] = nil
 		redirect_to root_path, notice: "You have been logged out."
 	end
 end

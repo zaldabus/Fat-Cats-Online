@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def current_user
-  	session[:user]
+  	@current_user ||= User.find_by_id(session[:user_id])
   end
 
   def logged_in?
@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
 
   def require_user
   	if !logged_in?
-  		redirect_to root_path, error: "You must be logged in to access this page!"
+      flash[:error]  = "You must be logged in to access this page!"
+  		redirect_to root_path
   	end
   end
 end

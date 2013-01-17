@@ -7,7 +7,6 @@ class PostsController < ApplicationController
 
   def show
   	@post = Post.where(slug: params[:id]).first
-
 	end
 
 	def new
@@ -15,8 +14,14 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		Post.create(params[:post])
-		redirect_to root_path
+		@post = Post.create(params[:post])
+		@post.user = current_user
+
+		if @post.save
+			redirect_to root_path
+		else
+			render 'new'
+		end
 	end
 
 end

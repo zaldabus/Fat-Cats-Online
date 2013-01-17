@@ -1,26 +1,45 @@
 <h2>Fat Cats Online</h2>
 
-<ul>
-	<% @posts.each do |post| %>
-		<li>
-			<%= link_to post_votes_path(post, direction: "up"),  method: :post do %>
-				<i class="icon-arrow-up"></i>
-			<% end %>
+<table>
 
-			<%= display_url_link(post) %> </br>
+<% @posts.each do |post| %>
+	<tr>
+		<td>
+			<div class="voteBox">
+				<%= link_to post_votes_path(post, direction: "up"),  method: :post do %>
+					<i class="icon-thumbs-up"></i>
+				<% end %>
 
-			<spam> <%= post.vote_number %> </spam>
-			(<%= link_to pluralize(post.comments.count, "comment" ), post_path(post) %>) </br>
+				</br>
 
-			<%= link_to post_votes_path(post, direction: "down"), method: :post do %>
-				<i class="icon-arrow-down"></i></a>
-			<% end %>
+				<strong> <%= post.vote_number %> </strong>
 
-		</li>
-	<% end %>
-</ul>
+				</br>
+
+				<%= link_to post_votes_path(post, direction: "down"), method: :post do %>
+					<i class="icon-thumbs-down"></i>
+				<% end %>
+			</div>
+
+		</td>
+		<td>
+
+			<div>
+				<%= display_url_link(post) %>
+				</br>
+				(<%= link_to pluralize(post.comments.count, "comment" ), post_path(post) %>)
+			</div>
+
+			</br>
+
+		</td>
+	</tr>
+<% end %>
+
+</table>
+
 </br>
 
 <% if logged_in? %>
-	<h4><%= link_to "Submit a link", new_post_path %></h4>
+	<a href="posts/new" button class="btn btn-large">Submit a link</a>
 <% end %>

@@ -1,1 +1,11 @@
-Congratulations!  You have successfully created a user account with name <%= @user %>
+<h2>User Page</h2>
+
+Welcome <%= @user.username %>!
+You've been a member of this site since <%= @user.created_at.to_date.to_s(:long_ordinal) %>
+
+</br>
+
+<% if @created_less_than_a_week_ago %>
+  You've been here less than a week!
+  Lets put up some more content!
+<% end %>

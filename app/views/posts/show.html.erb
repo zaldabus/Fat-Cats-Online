@@ -6,21 +6,27 @@
 
 <p> <%= pluralize(@post.comments.count, "comment") %> </p>
 
-<ul>
+<ul class="unstyled">
 <% @post.comments.each do |comment| %>
 	<li>
+	<%= comment.user.username %> wrote:
 	<%= comment.content %>
 	</li>
 <% end %>
 </ul>
 </br>
 
+<% if logged_in? %>
 <p>
 <h4> Create a New Comment </h4>
   <%= form_for [@post, @post.comments.new] do |f| %>
      <%= f.label :content %>
      <%= f.text_area :content, rows: 5 %>
    </br>
-     <%= f.submit "Submit Comment" %>
+     <%= f.submit "Submit Comment", class: "btn btn-large" %>
   <% end %>
 </p>
+
+<% else %>
+You must <%= link_to "Register", register_path %> | <%= link_to "Login", login_path %> to add comments.
+<% end %>
